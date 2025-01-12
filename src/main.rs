@@ -1,5 +1,5 @@
 mod system;
 
 fn main() {
-    println!("{}", system::BitBoard::new());
+    println!("Hello world!");
 }

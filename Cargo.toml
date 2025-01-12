@@ -3,4 +3,25 @@ name = "rush-rs"
 version = "0.1.0"
 edition = "2021"
 
+[profile.release]
+lto = "fat"
+opt-level = 3
+code-gen-units = 1
+panic = "abort"
+strip = true
+debug = false
+debug-assertions = false
+overflow-checks = false
+
+[profile.dev]
+opt-level = 1
+debug = true
+incremental = true
+
+[profile.bench]
+inherits = "release"
+lto = "fat"
+codegen-units = 1
+opt-level = 3
+
 [dependencies]
