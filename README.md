@@ -1,5 +1,5 @@
 # Rush-rs Chess Engine
-Rushers is a toy chess engine written in Rust, primarily used to help me learn Rust. The name comes from "Puzzle Rush," as I wanted to make my own engine that could compete with me in puzzle rush. The end goal is to have it beat me at the 2400 puzzle ELO level.
+Rushers is a toy chess engine written in Rust, primarily used to help me learn Rust. The name comes from "Puzzle Rush". The end goal is to have it beat me at the 2400 puzzle ELO level, although it is also a general purpose chess engine.
 
 ## Status: Early Development
 Currently implementing core chess functionality:

@@ -1,19 +1,34 @@
+use super::parse_fen;
+
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]
 pub struct State {
     pub castling_rights: CastlingRights,
     pub en_passant: Option<Square>,
-    pub ply: u8,
+    pub half_move: u8,
     pub stm: usize,
 }
 
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]
-pub struct CastlingRights(u8);
+pub struct CastlingRights(pub u8);
 impl CastlingRights {
     pub fn empty() -> Self {
         Self(Castling::NO_CASTLING)
     }
     pub fn all() -> Self {
         Self::default()
+    }
+}
+
+impl State {
+    pub fn from_fen(fen: &str) -> Self {
+        let parsed = parse_fen(fen);
+
+        Self {
+            castling_rights: parsed.castling_rights,
+            en_passant: parsed.en_passant,
+            half_move: 0,
+            stm: parsed.side_to_move as usize,
+        }
     }
 }
 
@@ -40,7 +55,7 @@ impl Castling {
 }
 
 #[derive(Hash, PartialEq, Eq, Debug, Clone)]
-pub struct Square(usize);
+pub struct Square(pub usize);
 
 #[repr(usize)]
 #[rustfmt::skip]

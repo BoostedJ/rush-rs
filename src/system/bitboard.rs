@@ -26,26 +26,3 @@ impl BitBoard {
         self.0.count_ones()
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    impl BitBoard {
-        fn debug_print(&self) {
-            for rank in (0..8).rev() {
-                for file in 0..8 {
-                    let mask: u16 = rank*8 + file;
-                    let bit = (self.0 >> mask) & 1;
-                    print!("{} ", bit);
-                }
-                println!();
-            }
-        }
-    }
-    #[test]
-    fn test_bitboard_display() {
-        let bitboard = BitBoard::new();
-        bitboard.debug_print();
-    }
-}
