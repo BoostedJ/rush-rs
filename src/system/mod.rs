@@ -1,13 +1,9 @@
-pub mod bitboard;
-pub mod state;
-pub mod pieces;
+pub mod board;
+pub mod hash;
 pub mod fen;
-pub mod zobrist;
-pub mod prng;
+pub mod state;
 
-pub use bitboard::*;
-pub use state::*;
-pub use pieces::*;
+pub use board::*;
+pub use hash::*;
 pub use fen::*;
-pub use zobrist::*;
-pub use prng::*;
+pub use state::*;

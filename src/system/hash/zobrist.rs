@@ -1,4 +1,6 @@
-use super::{prng::LcgRng, Piece, Color};
+use super::LcgRng;
+use super::super::{ Board, Color };
+
 
 const NUM_PIECES: usize = 12;
 const NUM_SQUARES: usize = 64;
@@ -10,13 +12,6 @@ pub struct Zobrist {
     castling_rights: [u64; NUM_CASTLING_RIGHTS],
     en_passant_file: [u64; NUM_EN_PASSANT_FILES],
     side_to_move: u64,
-}
-
-pub struct ZobBoard {
-    pub pieces: [Option<Piece>; 64],
-    pub castling_rights: u8,
-    pub en_passant_file: Option<u8>,
-    pub side_to_move: Color,
 }
 
 impl Zobrist {
@@ -50,7 +45,7 @@ impl Zobrist {
         }
     }
 
-    pub fn hash(&self, board: &ZobBoard) -> u64 {
+    pub fn hash(&self, board: &Board) -> u64 {
         let mut hash = 0u64;
 
         for (square, piece) in board.pieces.iter().enumerate() {
@@ -60,10 +55,10 @@ impl Zobrist {
             }
         }
 
-        hash ^= self.castling_rights[board.castling_rights as usize];
+        hash ^= self.castling_rights[board.castling_rights.0 as usize];
 
-        if let Some(file) = board.en_passant_file {
-            hash ^= self.en_passant_file[file as usize];
+        if let Some(square) = board.en_passant {
+            hash ^= self.en_passant_file[(square.0 & 7) as usize];
         }
 
         if board.side_to_move == Color::Black {

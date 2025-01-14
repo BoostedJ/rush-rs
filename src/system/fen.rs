@@ -35,7 +35,7 @@ pub fn parse_fen(fen: &str) -> ParsedFen {
         }
     }
 
-    let mut castling_rights = CastlingRights(castling);
+    let castling_rights = CastlingRights(castling);
 
     let en_passant = match parts[3] {
         "-" => None,
@@ -58,7 +58,7 @@ pub fn parse_fen(fen: &str) -> ParsedFen {
     }
 }
 
-pub fn fen_to_bb(position: String) -> [BitBoard; 12] {
+fn fen_to_bb(position: String) -> [BitBoard; 12] {
     let mut piece_bitboards = [BitBoard(0); 12];
 
     let mut rank = 7;

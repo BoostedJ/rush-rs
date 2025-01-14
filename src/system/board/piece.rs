@@ -1,3 +1,4 @@
+#[derive(Debug, Hash, Clone, Copy, PartialEq, Eq)]
 pub enum Piece {
     WhitePawn,
     WhiteKnight,
@@ -11,6 +12,7 @@ pub enum Piece {
     BlackRook,
     BlackQueen,
     BlackKing,
+    NONE,
 }
 
 #[derive(Debug, Clone, Copy, Hash, PartialEq, Eq)]
@@ -18,6 +20,9 @@ pub enum Color {
     White,
     Black,
 }
+
+#[derive(Hash, PartialEq, Eq, Debug, Clone, Copy)]
+pub struct Square(pub usize);
 
 impl Piece {
     pub fn to_index(&self) -> usize {
@@ -34,7 +39,25 @@ impl Piece {
             Piece::BlackRook => 9,
             Piece::BlackQueen => 10,
             Piece::BlackKing => 11,
+            Piece::NONE => 12,
         }
     }
-    
+
+    pub fn from_index(i: usize) -> Piece {
+        match i {
+            0 => Piece::WhitePawn,
+            1 => Piece::WhiteKnight,
+            2 => Piece::WhiteBishop,
+            3 => Piece::WhiteRook,
+            4 => Piece::WhiteQueen,
+            5 => Piece::WhiteKing,
+            6 => Piece::BlackPawn,
+            7 => Piece::BlackKnight,
+            8 => Piece::BlackBishop,
+            9 => Piece::BlackRook,
+            10 => Piece::BlackQueen,
+            11 => Piece::BlackKing,
+            _ => Piece::NONE,
+        }
+    }
 }
