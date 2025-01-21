@@ -1,3 +1,7 @@
+//! Game state tracking
+//! 
+//! Maintains game phase, evaluation metric, and move history
+//! Separate from board representation for evaluation
 use super::{ parse_fen, Zobrist, CastlingRights, Square, Piece, BitBoard };
 
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]
@@ -20,11 +24,11 @@ pub enum GamePhase {
 }
 
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]
-pub struct Move {
-    pub from: Square,
-    pub to: Square,
-    pub promotion: Option<Piece>,
-    pub capture: Option<Piece>,
+pub enum Move {
+    Normal { from: Square, to: Square },
+    Capture { from: Square, to: Square, captured: Piece },
+    Promotion { from: Square, to: Square, piece: Piece },
+    CapturePromotion { from: Square, to: Square, captured: Piece, promotion: Piece },
 }
 
 impl State {

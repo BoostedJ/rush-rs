@@ -1,3 +1,7 @@
+//! Zobrist hashing implementation
+//! 
+//! Generates unique position keys for board states
+//! Used for position repetition detection and transposition
 use super::LcgRng;
 use super::super::{ Board, Color };
 

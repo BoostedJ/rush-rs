@@ -1,3 +1,7 @@
+//! Bitboard operations and utilities
+//! 
+//! Board representation using 64-bit integer,
+//! where each bit represents a square's occupancy
 #[derive(Debug, Clone, Copy, Hash, PartialEq, Eq)]
 pub struct BitBoard(pub u64);
 
@@ -25,4 +29,24 @@ impl BitBoard {
     pub fn pop_count(&self) -> u32 {
         self.0.count_ones()
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_bitboard_operations() {
+        let mut bb = BitBoard::new();
+
+        bb.set_bit(0);
+        assert_eq!(bb.get_bit(0), true);
+
+        bb.clear_bit(0);
+        assert_eq!(bb.get_bit(0), false);
+
+        bb.set_bit(63);
+        bb.set_bit(27);
+        assert_eq!(bb.pop_count(), 2);
+    } // SUCCESS
 }

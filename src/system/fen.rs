@@ -1,3 +1,6 @@
+//! FEN string parsing and board setup
+//! 
+//! Converts FEN strings into board positions
 use super::{ BitBoard, Castling, CastlingRights, Color, Square };
 
 pub struct ParsedFen {
@@ -115,3 +118,22 @@ fn char_to_piece(c: char) -> Option<usize> {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn debug_fen_position_state() {
+        let start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+        let parsed = parse_fen(start_fen);
+
+        assert_eq!(parsed.piece_boards[0].pop_count(), 8); // 8 white pawns
+
+        // game state
+        assert_eq!(parsed.side_to_move, Color::White);
+        assert_eq!(parsed.castling_rights.0, Castling::ANY_CASTLING);
+        assert_eq!(parsed.en_passant, None);
+        assert_eq!(parsed.half_move, 0);
+        assert_eq!(parsed.full_move, 1);
+    } // SUCCESS
+}

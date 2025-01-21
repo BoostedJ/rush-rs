@@ -1,3 +1,6 @@
+//! Chess piece definitions and operations
+//! 
+//! Defines piece types, colors, and conversion utilities
 #[derive(Debug, Hash, Clone, Copy, PartialEq, Eq)]
 pub enum Piece {
     WhitePawn,
@@ -14,15 +17,6 @@ pub enum Piece {
     BlackKing,
     NONE,
 }
-
-#[derive(Debug, Clone, Copy, Hash, PartialEq, Eq)]
-pub enum Color {
-    White,
-    Black,
-}
-
-#[derive(Hash, PartialEq, Eq, Debug, Clone, Copy)]
-pub struct Square(pub usize);
 
 impl Piece {
     pub fn to_index(&self) -> usize {
